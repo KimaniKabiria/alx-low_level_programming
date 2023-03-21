@@ -2,20 +2,16 @@
 
 /**
  * _abs - compute absolute value of integer
- * @nun: integer argument
+ * @n: integer argument
  * Return: absolute value
  */
 
-int _abs(int num)
+int _abs(int n)
 {
-    if (num < 0)
-    {
-        return (-num);
-    } 
-    else
-    {
-        return (num);
-    }
-	_putchar('\n');
-    return (0);
+	if (n > 0)
+		return (n);
+	else if (n < 0)
+		return (-n);
+
+	return (0);
 }
