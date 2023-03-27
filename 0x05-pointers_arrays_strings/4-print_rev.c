@@ -2,24 +2,31 @@
 
 /**
  * print_rev - prints a string, in reverse, followed by a new line
- * @s: string to print
+ * @s: string to reverse
  */
 
 void print_rev(char *s)
 {
-    int len = 0;
-    int i;
-    while (*s != '\0')
-    {
-        len++;
-        ++s;
-    }
 
-    for(i = len; i > 0; i--)
-    {
-        _putchar(*s);
-        s--;
-    }
+	int len = 0;
+	int i;
 
-    _putchar('\n');
+	/* iterate to find length of string and point to last character */
+	while (*s != '\0')
+	{
+		len++;
+		++s;
+	}
+
+	/* go back to character before null character */
+	s--;
+
+	/* print string reversed */
+	for (i = len; i > 0; i--)
+	{
+		_putchar(*s);
+		s--;
+	}
+
+	_putchar('\n');
 }
