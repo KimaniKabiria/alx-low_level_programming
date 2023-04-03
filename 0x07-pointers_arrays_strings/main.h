@@ -49,4 +49,10 @@ char *_strstr(char *haystack, char *needle);
 
 void print_chessboard(char (*a)[8]);
 
+/**
+ * print_diagsums - print sums of diagonals in matrix
+ */
+
+void print_diagsums(int *a, int size)
+
 #endif
