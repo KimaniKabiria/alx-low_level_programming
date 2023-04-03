@@ -55,4 +55,10 @@ void print_chessboard(char (*a)[8]);
 
 void print_diagsums(int *a, int size);
 
+/**
+ * set_string - set value of pointer to a char
+ */
+
+void set_string(char **s, char *to);
+
 #endif
