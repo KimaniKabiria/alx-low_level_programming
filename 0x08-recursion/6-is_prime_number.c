@@ -3,17 +3,17 @@
 /**
  * is_prime - recursively divide by higher divisor, skip even nums
  * @n: number to check if prime
- * @divisor: divisor
+ * @d: divider (more than 3)
  * Return: 1 if prime, 0 if not, or recursive function call
  */
 
-int is_prime(int n, int divisor)
+int is_prime(int n, int d)
 {
-	if (n == divisor)
+	if (n == d)
 		return (1);
-	if (n % divisor == 0)
+	if (n % d == 0)
 		return (0);
-	return (is_prime(n, divisor + 1));
+	return (is_prime(n, d + 1));
 
 }
 
@@ -25,13 +25,13 @@ int is_prime(int n, int divisor)
 
 int is_prime_number(int n)
 {
-	int divisor = 3;
+	int d = 3; //start divider from 3 if n is not even
 
-	if (n % 2 == 0 || n < 2)
+	if (n % 2 == 0 || n < 2) //Check if even
 		return (0);
 	if (n == 2)
 		return (1);
 
-	return (is_prime(n, divisor));
+	return (is_prime(n, d));
 }
 
