@@ -56,4 +56,10 @@ int is_prime_number(int n);
 
 int is_palindrome(char *s);
 
+/**
+ * wildcmp - compare two string if identical
+ */
+
+int wildcmp(char *s1, char *s2);
+
 #endif
