@@ -25,9 +25,9 @@ int is_prime(int n, int d)
 
 int is_prime_number(int n)
 {
-	int d = 3; //start divider from 3 if n is not even
+	int d = 3; /* start divider from 3 if n is not even */
 
-	if (n % 2 == 0 || n < 2) //Check if even
+	if (n % 2 == 0 || n < 2) /* Check if even */
 		return (0);
 	if (n == 2)
 		return (1);
