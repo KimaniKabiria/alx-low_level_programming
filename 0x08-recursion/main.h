@@ -25,4 +25,10 @@ void _print_rev_recursion(char *s);
 
 int _strlen_recursion(char *s);
 
+/**
+ * factorial - get factorial of given number
+ */
+
+int factorial(int n);
+
 #endif
