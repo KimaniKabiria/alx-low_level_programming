@@ -2,7 +2,8 @@
 
 /**
  * factorial - get factorial of given number
- * @n - number
+ * @n: number
+ * Return: if less than 0 return -1 else return factorial
  */
 
 int factorial(int n)
