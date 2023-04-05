@@ -50,4 +50,10 @@ int _sqrt_recursion(int n);
 
 int is_prime_number(int n);
 
+/**
+ * is_palindrome - check if string is plaindrome
+ */
+
+int is_palindrome(char *s);
+
 #endif
