@@ -10,6 +10,7 @@
 int main(int argc, char *argv[])
 {
 	int no = 0;
+
 	while (no < argc)
 		printf("%s\n", argv[no++]);
 
