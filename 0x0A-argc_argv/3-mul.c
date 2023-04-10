@@ -8,9 +8,9 @@
  * Return: 0 - success, 1 - error if two arguments not given
  */
 
-int main(int argc, char &argv[])
+int main(int argc, char *argv[])
 {
-	if (argc !=3 )
+	if (argc != 3)
 	{
 		printf("Error\n");
 		return (1);
