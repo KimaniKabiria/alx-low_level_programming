@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 /**
  * main - print sum if all arguments given are numbers
  * @argc: argument counter
@@ -22,7 +21,9 @@ int main(int argc, char *argv[])
 
 	while (i < argc)
 	{
-		if (!(argv[i] >= '0' && argv[i] <= '9'))
+		char argvv = *argv[i];
+
+		if (!(argvv >= '0' && argvv <= '9'))
 		{
 			printf("Error\n");
 			return (1);
