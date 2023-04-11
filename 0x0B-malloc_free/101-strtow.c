@@ -14,16 +14,24 @@ int number_w(char *str)
 
 	for (i = 0; str[i] != '\0'; i++)
 	{
-		if (*str == ' ')
-			str++;
-		else
-		{
-			for (; str[i] != ' ' && str[i] != '\0'; i++)
-				str++;
+		if (str[i] != ' ' && (str[i + 1] == ' ' || str[i + 1] == '\0'))
 			num++;
-		}
 	}
 	return (num);
+}
+
+/**
+* length_w - Get the length of a word
+* @str: Pointer
+* Return: The length of the word
+*/
+int length_w(char *str)
+{
+	int length = 0;
+
+	while (str[length] != ' ' && str[length] != '\0')
+		length++;
+	return (length);
 }
 
 /**
@@ -47,8 +55,8 @@ void freer(char **str, int i)
 
 char **strtow(char *str)
 {
-	int total_w = 0, i = 0, j = 0, length = 0;
-	char **w, *found_w;
+	int total_w = 0, i, j, k, length = 0;
+	char **w;
 
 	if (str == 0 || *str == 0)
 		return (NULL);
@@ -58,36 +66,23 @@ char **strtow(char *str)
 	w = malloc((total_w + 1) * sizeof(char *));
 	if (w == 0)
 		return (NULL);
-	for (i = 0; *str != '\0' &&  i < total_w; i++)
+	for (i = 0, j = 0; *str != '\0' &&  i < total_w; i++)
 	{
-		if (*str == ' ')
-			str++;
-		else
+		while (str[j] == ' ')
+			j++;
+		length = length_w(&str[j]);
+		w[i] = malloc((length + 1) * sizeof(char));
+		if (w[i] == 0)
 		{
-			found_w = str;
-			for (; *str != ' ' && *str != '\0';)
-			{
-				length++;
-				str++;
-			}
-			w[i] = malloc((length + 1) * sizeof(char));
-			if (w[i] == 0)
-			{
-				freer(w, i);
-				return (NULL);
-			}
-			while (*found_w != ' ' && *found_w != '\0')
-			{
-				w[i][j] = *found_w;
-				found_w++;
-				j++;
-			}
-			w[i][j] = '\0';
-			j = 0;
-			length = 0;
-			str++;
+			freer(w, i);
+			return (NULL);
 		}
+		for (k = 0; k < length; k++)
+			w[i][k] = str[j++];
+
+		w[i][k] = '\0';
 	}
+	w[total_w] = NULL;
 	return (w);
 }
 
