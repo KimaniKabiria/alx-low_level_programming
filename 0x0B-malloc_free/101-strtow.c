@@ -78,7 +78,7 @@ char **strtow(char *str)
 			}
 			while (*found_w != ' ' && *found_w != '\0')
 			{
-				words[i][j] = *found_w;
+				w[i][j] = *found_w;
 				found_w++;
 				j++;
 			}
