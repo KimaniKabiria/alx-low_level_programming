@@ -12,11 +12,12 @@
 
 char **strtow(char *str)
 {
+	int c = 0, i = 0, j = 0;
+	int length = strlen(str);
+	char **w = malloc((length + 1) * sizeof(char *));
+
 	if (str == NULL || *str == '\0')
 		return (NULL);
-	int count = 0, i = 0, j = 0, length = strlen(str);
-
-	char **w = malloc((length + 1) * sizeof(char *));
 
 	if (w == NULL)
 		return (NULL);
@@ -25,24 +26,24 @@ char **strtow(char *str)
 	{
 		if (!isspace(str[i]))
 		{
-			count++;
+			c++;
 			j = 1;
 			while (j < length && !isspace(str[j]))
 				j++;
-			w[count - 1] = malloc(j - i + 1);
-			if (w[count - 1] == NULL)
+			w[c - 1] = malloc(j - i + 1);
+			if (w[c - 1] == NULL)
 			{
-				while (--count >= 0)
-					free(w[count]);
+				while (--c >= 0)
+					free(w[c]);
 				free(w);
 				return (NULL);
 			}
-			strncpy(w[count - 1], &str[i], j - i);
-			w[count - 1][j - i] = '\0';
+			strncpy(w[c - 1], &str[i], j - i);
+			w[c - 1][j - i] = '\0';
 			i = j;
 		}
 	}
-	w[count] = NULL;
+	w[c] = NULL;
 	return (w);
 }
 
