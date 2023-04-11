@@ -82,7 +82,7 @@ char **strtow(char *str)
 				found_w++;
 				j++;
 			}
-			words[i][j] = '\0';
+			w[i][j] = '\0';
 			j = 0;
 			length = 0;
 			str++;
