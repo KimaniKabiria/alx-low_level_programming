@@ -10,8 +10,8 @@ void add_nums(char *final_prod, char *next_prod, int next_len);
 
 /**
  * get_length - Gets the length of a string.
- * @str: The string to be measured.
- * Return: The length of the string.
+ * @str: string to be measured.
+ * Return: returns the length of the string.
  */
 
 int get_length(char *str)
@@ -27,8 +27,8 @@ int get_length(char *str)
 /**
  * create_array - Creates an array of chars and initializes it with
  *                 the character 'a'. Adds a terminating null byte.
- * @size: The size of the array to be initialized.
- * Return: A pointer to the array.
+ * @size: size of the array to be initialized.
+ * Return: returns pointer to the array.
  */
 
 char *create_array(int size)
@@ -51,8 +51,8 @@ char *create_array(int size)
 
 /**
  * skip_zeroes - Skips zeros until it hits a non-zero number.
- * @str: The string of numbers to be iterate through.
- * Return: A pointer to the next non-zero element.
+ * @str: string of numbers to be iterate through.
+ * Return: returns pointer to the next non-zero element.
  */
 
 char *skip_zeroes(char *str)
@@ -65,8 +65,8 @@ char *skip_zeroes(char *str)
 
 /**
  * get_digit - Converts a digit character to a corresponding int.
- * @c: The character to be converted.
- * Return: The converted int.
+ * @c: character to be converted.
+ * Return: returns the converted int.
  */
 
 int get_digit(char c)
