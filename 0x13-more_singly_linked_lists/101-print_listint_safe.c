@@ -1,78 +1,79 @@
-#include "lists.h"
 #include <stdio.h>
-#include <stdlib.h>
+#include "lists.h"
 
 /**
-* add_node - function that adds a new node at the start of list
-* @head: pointer to pointer to adrsList list
-* @ptr: address to be added
-* Return: the address of head, or NULL if it failed
-**/
-adrsList *add_node(adrsList **head, void *ptr)
+ * check_node - check for unique nodes, and add to listint_t linked list
+ * @head: pointer to a pointer to a linked list
+ * @n: pointer to value
+ *
+ * Return: pointer to new element
+ */
+size_t check_node(listptr_t **head, const listptr_t *n)
 {
-	adrsList *new;
+	listptr_t *new;
 
-	new = malloc(sizeof(adrsList));
+	new = malloc(sizeof(listptr_t));
 	if (new == NULL)
 	{
-		free_adrsList(*head);
+		free_node(*head);
 		exit(98);
 	}
-	(*new).ptr = ptr;
-	(*new).next = *head;
+	new->store = (void *)n;
+	new->next = *head;
 	*head = new;
-	return (*head);
+	return (new);
 }
 
 /**
-* free_adrsList - frees newly craeted address list
-* @h: head of the list
-**/
-void free_adrsList(adrsList *h)
+ * free_node - free dynamic memory
+ * @head: pointer to a pointer to a linked list
+ *
+ * Return: void
+ */
+void free_node(listptr_t *head)
 {
-	adrsList *frN;
+	listint_t *temp;
 
-	while (h)
-	{
-		frN = h;
-		h = (*h).next;
-		free(frN);
-	}
-}
-
-/**
-* print_listint_safe - prints listint_t list, safe version
-* @head: pointer to elements of type listint_t
-* Return: the number of nodes in the list
-**/
-size_t print_listint_safe(const listint_t *head)
-{
-	size_t counter;
-	adrsList *newList, *newHead;
-
-	counter = 0;
-	if (head == NULL)
-		return (counter);
-
-	newHead = newList = NULL;
 	while (head)
 	{
-		while (newList)
-		{
-			if ((*newList).ptr == head)
-			{
-				printf("-> [%p] %d\n", (void *)head, (*head).n);
-				free_adrsList(newHead);
-				return (counter);
-			}
-			newList = (*newList).next;
-		}
-		printf("[%p] %d\n", (void *)head, (*head).n);
-		newList = add_node(&newHead, (void *)head);
-		head = (*head).next;
-		counter++;
+		temp = head;
+		head = head->next;
+		free(temp);
 	}
-	free_adrsList(newHead);
-	return (counter);
+}
+
+/**
+ * print_listint_safe - prints a linked list containing loops
+ * @head: pointer to listint_t linked list
+ *
+ * Return: number of elements
+ */
+size_t print_listint_safe(const listint_t *head)
+{
+	listptr_t *temp, *new;
+	size_t count;
+
+	new = NULL;
+	count = 0;
+	while (head)
+	{
+		temp = new;
+		while (temp)
+		{
+			if (temp->store == head)
+			{
+				printf("-> [%p] %d", &head, head->n);
+				free_node(temp);
+				return (count);
+			}
+			temp = temp->next;
+		}
+		printf("[%p] %d", &head, head->n);
+		check_node(new, head);
+		head = head->next;
+		count++;
+	}
+	free_node(new);
+	return (count);
 }
 
