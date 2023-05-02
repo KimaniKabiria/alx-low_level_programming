@@ -1,79 +1,60 @@
-#include <stdio.h>
 #include "lists.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 /**
- * check_node - check for unique nodes, and add to listint_t linked list
- * @head: pointer to a pointer to a linked list
- * @n: pointer to value
- *
- * Return: pointer to new element
+ * _new - add new node to list
+ * @l: the old list
+ * @s: size of the new list
+ * @n: new node
+ * Return: pointer to the new list
  */
-size_t check_node(listptr_t **head, const listptr_t *n)
-{
-	listptr_t *new;
 
-	new = malloc(sizeof(listptr_t));
-	if (new == NULL)
+const listint_t **_new(const listint_t **l, size_t s, const listint_t *n)
+{
+	const listint_t **newlist;
+	size_t i;
+
+	newlist = malloc(s * sizeof(listint_t *));
+	if (newlist == NULL)
 	{
-		free_node(*head);
+		free(l);
 		exit(98);
 	}
-	new->store = (void *)n;
-	new->next = *head;
-	*head = new;
-	return (new);
+	for (i = 0; i < s - 1; i++)
+		newlist[i] = l[i];
+	newlist[i] = n;
+	free(l);
+	return (newlist);
 }
 
 /**
- * free_node - free dynamic memory
- * @head: pointer to a pointer to a linked list
+ * print_listint_safe - prints a listint_t linked list.
+ * @head: pointer to the start of the list
  *
- * Return: void
- */
-void free_node(listptr_t *head)
-{
-	listint_t *temp;
-
-	while (head)
-	{
-		temp = head;
-		head = head->next;
-		free(temp);
-	}
-}
-
-/**
- * print_listint_safe - prints a linked list containing loops
- * @head: pointer to listint_t linked list
- *
- * Return: number of elements
+ * Return: the number of nodes in the list
  */
 size_t print_listint_safe(const listint_t *head)
 {
-	listptr_t *temp, *new;
-	size_t count;
+	size_t i, num = 0;
+	const listint_t **list = NULL;
 
-	new = NULL;
-	count = 0;
-	while (head)
+	while (head != NULL)
 	{
-		temp = new;
-		while (temp)
+		for (i = 0; i < num; i++)
 		{
-			if (temp->store == head)
+			if (head == list[i])
 			{
-				printf("-> [%p] %d", &head, head->n);
-				free_node(temp);
-				return (count);
+				printf("-> [%p] %d\n", (void *)head, head->n);
+				free(list);
+				return (num);
 			}
-			temp = temp->next;
 		}
-		printf("[%p] %d", &head, head->n);
-		check_node(new, head);
+		num++;
+		list = _new(list, num, head);
+		printf("[%p] %d\n", (void *)head, head->n);
 		head = head->next;
-		count++;
 	}
-	free_node(new);
-	return (count);
+	free(list);
+	return (num);
 }
-
