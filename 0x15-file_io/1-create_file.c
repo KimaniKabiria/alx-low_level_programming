@@ -8,7 +8,7 @@
  * @str: string
  * Return: length
  */
-int _strlen(char *str)
+int _strlen(const char *str)
 {
 	int len;
 
@@ -19,8 +19,7 @@ int _strlen(char *str)
 }
 
 /**
- * create_file - create file with permissions rw------- and write
- * if file already exists, don't change permissions and just truncate it
+ * create_file - create file with permissions
  * @filename: name to give to new file
  * @text_content: writes this content into file
  * Return: 1 on success, -1 on error
