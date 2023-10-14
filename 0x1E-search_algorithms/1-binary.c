@@ -1,53 +1,44 @@
-#include <stdio.h>
-#include <stdlib.h>
+/*
+ * File: 1-binary.c
+ * Auth: Brennan D Baraban
+ */
+
 #include "search_algos.h"
 
 /**
- * print_array = A function to print search array
- * 
- */
-int print_array(int *array, size_t L, size_t R) {
-    size_t i;
+  * binary_search - Searches for a value in a sorted array
+  *                 of integers using binary search.
+  * @array: A pointer to the first element of the array to search.
+  * @size: The number of elements in the array.
+  * @value: The value to search for.
+  *
+  * Return: If the value is not present or the array is NULL, -1.
+  *         Otherwise, the index where the value is located.
+  *
+  * Description: Prints the [sub]array being searched after each change.
+  */
+int binary_search(int *array, size_t size, int value)
+{
+	size_t i, left, right;
 
-    printf("Searching in array: ");
-    for( i = L; i < R; i++) {
-        printf("%d, ", array[i]);
-    }
-    printf("%d\n", array[i]);
-    
-    return 0;
-}
+	if (array == NULL)
+		return (-1);
 
-/**
- * binary_search - A function that searches for a value in an
- * array integers using Binary search algorithm
- * @array: An array pointer to the first element in the array to search in
- * @size: The number of elements in the array
- * @value: The value to search for
- * Return - If value is not present in array or
- * if array is NULL, your function must return -1
- */
-int binary_search(int *array, size_t size, int value){
-    size_t L, R, m;
+	for (left = 0, right = size - 1; right >= left;)
+	{
+		printf("Searching in array: ");
+		for (i = left; i < right; i++)
+			printf("%d, ", array[i]);
+		printf("%d\n", array[i]);
 
-    L = 0;
-    R = size - 1;
+		i = left + (right - left) / 2;
+		if (array[i] == value)
+			return (i);
+		if (array[i] > value)
+			right = i - 1;
+		else
+			left = i + 1;
+	}
 
-    
-    while (L <= R) {
-        print_array(array, L, R);
-        m = (L + R) / 2;
-
-        if (array[m] < value){
-            L = m + 1;
-        } 
-        else if (array[m] > value){
-            R = m - 1;
-        }
-        else {
-            return m;
-        }
-    }
-
-    return -1;
+	return (-1);
 }
